@@ -1,5 +1,6 @@
 #include"Vector2D.h"
 #include <math.h>
+#include <limits>
 //Direction Constants
 //Up direction (0,1) vector
 const Vector2D Vector2D::up = Vector2D(0,1);
@@ -43,8 +44,12 @@ const float Vector2D::Norm() const
 void Vector2D::Normalize()
 {
     float norm = this->Norm();
-    this->x/=norm;
-    this->y/=norm;
+    //if norm is equal to zero, do nothing
+    if(norm !=0)
+    {
+        this->x/=norm;
+        this->y/=norm;
+    }
 }
 //distance value between two points(vector2d)
 float Vector2D::Distance(const Vector2D& point1,const Vector2D& point2)
@@ -70,7 +75,7 @@ float Vector2D::RadiansBetween(const Vector2D& vector1,const Vector2D& vector2)
     {
         return std::acos(dotProduct/normProduct);
     }
-    return -1;
+    return -std::numeric_limits<float>::max();
 }
 //returns normalized vector with direction from point1 to point2
 Vector2D Vector2D::Direction(const Vector2D& point1,const Vector2D& point2)
