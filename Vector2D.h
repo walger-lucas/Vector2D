@@ -24,6 +24,7 @@ struct Vector2D
     const float Norm() const;
     void Normalize();
     void Invert();
+    const bool EqualTo(const Vector2D& vector) const;
 
     //Static Functions to manipulate vector2Ds
 

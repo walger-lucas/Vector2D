@@ -33,6 +33,7 @@ void Vector2D::Subtract(const Vector2D& vector)
     this->x -= vector.x;
     this->y -= vector.y;
 }
+//Function to subtract two vectors
 Vector2D Vector2D::Subtract(const Vector2D& vector1,const Vector2D& vector2)
 {
     return Vector2D(vector1.x-vector2.x,vector1.y-vector2.y);
@@ -66,6 +67,7 @@ void Vector2D::Normalize()
         this->y/=norm;
     }
 }
+//Normalizes vector
 Vector2D Vector2D::Normalize(const Vector2D& vector)
 {
     float norm = vector.Norm();
@@ -109,6 +111,14 @@ Vector2D Vector2D::Direction(const Vector2D& point1,const Vector2D& point2)
     Vector2D vec = Vector2D::Subtract(point2,point1);
     vec.Normalize();
     return vec;
+}
+
+//returns true if vector is equal to the vector that called function
+const bool Vector2D::EqualTo(const Vector2D& vector) const
+{
+    if(this->x==vector.x && this->y ==vector.y)
+        return true;
+    return false;
 }
 
 //Returns string with value of vector in "(x,y) format"
