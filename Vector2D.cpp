@@ -10,6 +10,8 @@ const Vector2D Vector2D::down = Vector2D(0,-1);
 const Vector2D Vector2D::left = Vector2D(-1,0);
 //Right direction (1,0) vector
 const Vector2D Vector2D::right = Vector2D(1,0);
+//Zero vector (0,0) vector
+const Vector2D Vector2D::zero = Vector2D(0,0);
 
 //Functions
 
@@ -40,6 +42,19 @@ const float Vector2D::Norm() const
 {
    return std::sqrt(this->x*this->x+this->y*this->y);
 }
+
+//invert direction of Vector
+void Vector2D::Invert()
+{
+    this->x*=-1;
+    this->y*=-1;
+}
+//invert direction of Vector
+Vector2D Vector2D::Invert(const Vector2D& vector)
+{
+    return Vector2D(-vector.x,-vector.y);
+}
+
 //Normalizes vector
 void Vector2D::Normalize()
 {
@@ -51,6 +66,17 @@ void Vector2D::Normalize()
         this->y/=norm;
     }
 }
+Vector2D Vector2D::Normalize(const Vector2D& vector)
+{
+    float norm = vector.Norm();
+    if(norm!=0)
+    {
+        return Vector2D(vector.x/norm,vector.y/norm);
+    }
+    return Vector2D::zero;
+
+}
+
 //distance value between two points(vector2d)
 float Vector2D::Distance(const Vector2D& point1,const Vector2D& point2)
 {

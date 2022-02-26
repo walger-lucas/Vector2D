@@ -15,7 +15,7 @@ struct Vector2D
 
     //direction constants
 
-    const static Vector2D up,down,left,right;
+    const static Vector2D up,down,left,right,zero;
 
     // Non-Static Functions to manipulate vector2Ds
 
@@ -23,18 +23,21 @@ struct Vector2D
     void Subtract(const Vector2D& vector);
     const float Norm() const;
     void Normalize();
+    void Invert();
 
     //Static Functions to manipulate vector2Ds
 
     static Vector2D Sum(const Vector2D& vector1,const Vector2D& vector2);
     static Vector2D Subtract(const Vector2D& vector1,const Vector2D& vector2);
+    static Vector2D Normalize(const Vector2D& vector);
+    static Vector2D Invert(const Vector2D& vector);
     static float Distance(const Vector2D& point1,const Vector2D& point2);
     static float DotProduct(const Vector2D& vector1,const Vector2D& vector2);
     static float RadiansBetween(const Vector2D& vector1, const Vector2D& vector2);
     static Vector2D Direction(const Vector2D& point1, const Vector2D& point2);
 
     //Function to create string with vector data
-    
+
     const std::string ToString() const;
 
 
