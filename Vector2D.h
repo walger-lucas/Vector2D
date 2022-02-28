@@ -30,6 +30,7 @@ struct Vector2D
 
     static Vector2D Sum(const Vector2D& vector1,const Vector2D& vector2);
     static Vector2D Subtract(const Vector2D& vector1,const Vector2D& vector2);
+    static Vector2D Multiply(const float& num,const Vector2D& vector2);
     static Vector2D Normalize(const Vector2D& vector);
     static Vector2D Invert(const Vector2D& vector);
     static float Distance(const Vector2D& point1,const Vector2D& point2);

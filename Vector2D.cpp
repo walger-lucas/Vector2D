@@ -38,6 +38,10 @@ Vector2D Vector2D::Subtract(const Vector2D& vector1,const Vector2D& vector2)
 {
     return Vector2D(vector1.x-vector2.x,vector1.y-vector2.y);
 }
+Vector2D Vector2D::Subtract(const float& num,const Vector2D& vector2)
+{
+    return Vector2D(num*vector2.x,num*vector2.y);
+}
 //Calculates norm of vector
 const float Vector2D::Norm() const
 {
