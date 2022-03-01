@@ -15,7 +15,7 @@ struct Vector2D
 
     //direction constants
 
-    const static Vector2D up,down,left,right,zero;
+    const static Vector2D up,down,left,right,upRight,upLeft,downLeft,downRight,zero;
 
     // Non-Static Functions to manipulate vector2Ds
 
@@ -30,7 +30,7 @@ struct Vector2D
 
     static Vector2D Sum(const Vector2D& vector1,const Vector2D& vector2);
     static Vector2D Subtract(const Vector2D& vector1,const Vector2D& vector2);
-    static Vector2D Multiply(const float& num,const Vector2D& vector2);
+    static Vector2D Multiply(const float& scalar,const Vector2D& vector2);
     static Vector2D Normalize(const Vector2D& vector);
     static Vector2D Invert(const Vector2D& vector);
     static float Distance(const Vector2D& point1,const Vector2D& point2);
@@ -42,14 +42,29 @@ struct Vector2D
 
     const std::string ToString() const;
 
-
-    //Constructors
+    // Member Operators
     
+    Vector2D operator+(const Vector2D& vec) const;
+    Vector2D operator-(const Vector2D& vec) const;
+    Vector2D operator/(const float& scalar) const;
+    bool operator==(const Vector2D& vec) const;
+    bool operator!=(const Vector2D& vec) const;
+    void operator=(const Vector2D& vec);
+    void operator-=(const Vector2D& vec);
+    void operator+=(const Vector2D& vec);
+    void operator*=(const float& scalar);
+    void operator/=(const float& scalar);
+    
+    //Constructors 
     Vector2D(): x(0),y(0) {};
     Vector2D(float x, float y) : x(x),y(y) {};
-
-    
 };
+
+//Non-Member Operations
+//* operation multiplies by scalar commutative
+Vector2D operator*(const Vector2D& vec,const float& scalar);
+Vector2D operator*(const float& scalar,const Vector2D& vec);
+
 
 
 #endif

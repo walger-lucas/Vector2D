@@ -1,6 +1,7 @@
 #include"Vector2D.h"
 #include <math.h>
 #include <limits>
+#include<stdexcept>
 //Direction Constants
 //Up direction (0,1) vector
 const Vector2D Vector2D::up = Vector2D(0,1);
@@ -12,6 +13,14 @@ const Vector2D Vector2D::left = Vector2D(-1,0);
 const Vector2D Vector2D::right = Vector2D(1,0);
 //Zero vector (0,0) vector
 const Vector2D Vector2D::zero = Vector2D(0,0);
+//UpRight vector (1,1).Normalized() vector
+const Vector2D Vector2D::upRight = Vector2D::Normalize(Vector2D::right+Vector2D::up);
+//UpLeft vector (-1,1).Normalized() vector
+const Vector2D Vector2D::upLeft = Vector2D::Normalize(Vector2D::left+Vector2D::up);
+//DownRight vector (1,-1).Normalize() vector
+const Vector2D Vector2D::downRight = Vector2D::Normalize(Vector2D::right+Vector2D::down);
+//DownLeft vector (-1,-1).Normalize() vector
+const Vector2D Vector2D::downLeft = Vector2D::Normalize(Vector2D::left+Vector2D::down);
 
 //Functions
 
@@ -38,9 +47,10 @@ Vector2D Vector2D::Subtract(const Vector2D& vector1,const Vector2D& vector2)
 {
     return Vector2D(vector1.x-vector2.x,vector1.y-vector2.y);
 }
-Vector2D Vector2D::Subtract(const float& num,const Vector2D& vector2)
+//multiplies vector with scalar
+Vector2D Vector2D::Multiply(const float& scalar,const Vector2D& vector2)
 {
-    return Vector2D(num*vector2.x,num*vector2.y);
+    return Vector2D(scalar*vector2.x,scalar*vector2.y);
 }
 //Calculates norm of vector
 const float Vector2D::Norm() const
@@ -131,5 +141,80 @@ const std::string Vector2D::ToString() const
     return "("+std::to_string(this->x)+","+std::to_string(this->y)+")";
 }
 
+//operations
+//+ operations sums 2 vectors
+Vector2D Vector2D::operator+(const Vector2D& vec) const
+{
+    return Sum(*this,vec);
+}
+//- operation subtracts 2 vectors
+Vector2D Vector2D::operator-(const Vector2D& vec) const
+{
+    return Subtract(*this,vec);
+}
+// divide operation multiplies vector by inverse of scalar
+Vector2D Vector2D::operator/(const float& scalar) const
+{
+    if(scalar != 0)
+        return Multiply(1/scalar,*this);
+    throw std::invalid_argument("Cannot divide Vector2D by zero");
+    return zero;
+}
+//tests if the two vectors are unequal
+bool Vector2D::operator==(const Vector2D& vec) const
+{
+    return this->EqualTo(vec);
+}
+//tests if the two vectors are unequal
+bool Vector2D::operator!=(const Vector2D& vec) const
+{
+    return !(this->EqualTo(vec));
+}
+//copies data from vec to this vector
+void Vector2D::operator=(const Vector2D& vec)
+{
+    this->x=vec.x;
+    this->y=vec.y;
+}
+//subtract vec from this vector
+void Vector2D::operator-=(const Vector2D& vec)
+{
+    this->Subtract(vec);
+}
+//add vec to this vector
+void Vector2D::operator+=(const Vector2D& vec)
+{
+    this->Sum(vec);
+}
+//multiply this vector by scalar
+void Vector2D::operator*=(const float& scalar)
+{
+    this->x *=scalar;
+    this->y *=scalar;
+}
+//multiply this vector by inverse of scalar
+void Vector2D::operator/=(const float& scalar)
+{
+    if(scalar!=0)
+    {
+        this->x /=scalar;
+        this->y /=scalar;
+    }
+    else
+    {
+        throw std::invalid_argument("Cannot Divide Vector2D by Zero");
+    }
+}
 
+
+//multiplies vec by scalar
+Vector2D operator * (const Vector2D& vec, const float& scalar)
+{
+    return Vector2D::Multiply(scalar,vec);
+}
+//multiplies vec by scalar
+Vector2D operator * (const float& scalar,const Vector2D& vec)
+{
+    return vec*scalar;
+}
 
