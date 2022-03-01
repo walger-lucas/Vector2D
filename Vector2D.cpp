@@ -152,6 +152,11 @@ Vector2D Vector2D::operator-(const Vector2D& vec) const
 {
     return Subtract(*this,vec);
 }
+//returns vector multiplied by -1
+Vector2D Vector2D::operator-() const
+{
+    return Vector2D(-this->x,-this->y);
+}
 // divide operation multiplies vector by inverse of scalar
 Vector2D Vector2D::operator/(const float& scalar) const
 {

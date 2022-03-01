@@ -45,6 +45,7 @@ struct Vector2D
     
     Vector2D operator+(const Vector2D& vec) const;
     Vector2D operator-(const Vector2D& vec) const;
+    Vector2D operator-() const;
     Vector2D operator/(const float& scalar) const;
     bool operator==(const Vector2D& vec) const;
     bool operator!=(const Vector2D& vec) const;
